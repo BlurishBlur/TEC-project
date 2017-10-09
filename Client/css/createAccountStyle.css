@@ -20,6 +20,11 @@ body {
     margin-left: 3%;
 }
 
+.inputText:focus {
+    border: 3px solid #282B2B;
+    transition: 0.5s;
+}
+
 .input {
     margin-top: 2%;
     margin-left: 15%;

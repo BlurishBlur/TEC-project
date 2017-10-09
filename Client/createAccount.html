@@ -10,6 +10,9 @@
                    if(password == $(this).val()){
                        $("#message").html("Password match!");
                    }
+                   if($(this).val() == ""){
+                       $("#message").html("");
+                   }
                    else{
                        $("#message").html("Password doesn't match!");
                    }
