@@ -60,7 +60,7 @@ routes = {
 handleRequest = function(request, response) {
     send_header(response);
     var routedRequest = request['method'] + request.url;
-    if(typeof(routes[routedRequest]) === 'function') {
+    if(routes[routedRequest]) {
         routes[routedRequest](request, response);
     }
     else {
