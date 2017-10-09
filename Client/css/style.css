@@ -50,7 +50,7 @@ body {
 }
 
 .button span::after {
-    content: '&#8594';
+    content: '\00bb';
     position: absolute;
     opacity: 0;
     top: 0;
