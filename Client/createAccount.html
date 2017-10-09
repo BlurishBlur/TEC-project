@@ -1,0 +1,34 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="css/createAccountStyle.css"/>
+        <title>Create Account</title>
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script>
+	       $(function() {
+               $("#repeat").keyup(function() {
+                   var password = $("#password").val();
+                   if(password == $(this).val()){
+                       $("#message").html("Password match!");
+                   }
+                   else{
+                       $("#message").html("Password doesn't match!");
+                   }
+               });
+           });
+        </script>
+    </head>
+    <body>
+        <div class="title">
+            Create Account
+        </div>
+        <div class="input">
+            <input id="username" type="text" class="inputText" placeholder="Username..."/><br><br><br>
+            <input id="password" type="password" class="inputText" placeholder="Password..."/><br><br><br>
+            <input id="repeat" type="password" class="inputText" placeholder="Repeat Password..."/><span id="message" class="message"></span>
+        </div>
+        <div class="input">
+            <button id="create" class="button"><span>CREATE</span></button>
+            <button id="cancel" onclick="location.href='index.html'" style="width: 140px" class="button moveRight"><span>CANCEL</span></button>
+        </div>
+    </body>
+</html>
