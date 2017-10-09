@@ -45,6 +45,7 @@ body {
 .button span {
     cursor: pointer;
     position: relative;
+    transition: 0.5s;
 }
 
 .button span::after {
@@ -52,6 +53,7 @@ body {
     position: absolute;
     opacity: 0;
     right: -20px;
+    transition: 0.5s;
 }
 
 .button.moveRight {
@@ -60,18 +62,15 @@ body {
 
 .button:hover {
     background-color: #37474F;
-    transition: 0.2s;
 }
 
 .button:hover span {
     padding-right: 25px;
-    transition: 0.2s;
 }
 
-.button:hover span:after {
+.button:hover span::after {
     opacity: 1;
     right: 0;
-    transition: 0.2s;
 }
 
 .button:active {
