@@ -7,11 +7,11 @@
 	       $(function() {
                $("#repeat").keyup(function() {
                    var password = $("#password").val();
-                   if(password == $(this).val()){
-                       $("#message").html("Password match!");
-                   }
-                   else if($(this).val() == ""){
+                   if($(this).val() == ""){
                        $("#message").html("");
+                   }
+                   else if(password == $(this).val()){
+                       $("#message").html("Password match!");
                    }
                    else{
                        $("#message").html("Password doesn't match!");
