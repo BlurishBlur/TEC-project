@@ -5,18 +5,20 @@
         <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
         <script>
 	       $(function() {
-               $("#repeat").keyup(function() {
-                   var password = $("#password").val();
-                   if($(this).val() == ""){
-                       $("#message").html("");
-                   }
-                   else if(password == $(this).val()){
-                       $("#message").html("Password match!");
-                   }
-                   else{
-                       $("#message").html("Password doesn't match!");
-                   }
-               });
+          function checkPassword() {
+              if($("#repeat").val() == ""){
+                $("#message").html("");
+              }
+              else if($("#password").val() == $("#repeat").val()){
+                  $("#message").html("Password match!");
+              }
+              else{
+                  $("#message").html("Password doesn't match!");
+              }
+            }
+            
+            $("#repeat").keyup(checkPassword);
+            $("#password").keyup(checkPassword);
            });
         </script>
     </head>
