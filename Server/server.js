@@ -6,7 +6,7 @@ const PORT = 9998;
 var users = [];
 users[users.length] = {name: "Niels"};
 
-send_header = function (response) {
+sendHeader = function (response) {
     response.writeHead(200, {'Content-Type': 'application/json',
                              'Access-Control-Allow-Origin': '*',
                              'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE'});
@@ -18,14 +18,14 @@ getUsers = function(request, response) {
 
 // http handlers
 handler_get = function (request, response) {
-    send_header(response);
+    sendHeader(response);
     //response.status(404).end("Not found");
     //response.end(JSON.stringify(library));
 };
 handler_put = function (request, response) {
     request.on('data', function(data) {
         console.log(''+data);
-        send_header(response);       
+        sendHeader(response);       
         //response.end(JSON.stringify(putInArray(''+data)));
         response.end(JSON.stringify('ALTING ER GODT'));
     });
@@ -33,23 +33,23 @@ handler_put = function (request, response) {
 handler_post = function (request, response) {
     request.on('data', function(data) {
         console.log(''+data);
-        send_header(response);
+        sendHeader(response);
         response.end(JSON.stringify(search(data)));
     });
 };
 handler_delete = function (request, response) {
     request.on('data', function(data) {
         deleteFromArray(data);
-        send_header(response);
+        sendHeader(response);
         response.end(JSON.stringify(4));
     });
 };
 handler_options = function (request, response) {
-    send_header(response);
+    sendHeader(response);
     response.end(null);
 };
 
-routes = {
+routes = { //undersøg nærmere hvornår put og post henholdsvis skal bruges
     'GET/users':     getUsers,
     'PUT/users':     handler_put,
     'POST':          handler_post,
@@ -58,13 +58,13 @@ routes = {
 };
 
 handleRequest = function(request, response) {
-    send_header(response);
+    sendHeader(response); // burde kun være nødvendigt at sende headeren her
     var routedRequest = request['method'] + request.url;
     if(routes[routedRequest]) {
         routes[routedRequest](request, response);
     }
     else {
-        response.end("Not found");
+        response.end("404 - Not found"); // egentligt burde statussen fra senderHeader sættes til 404 i stedet for 200 her
     }
 }
 
