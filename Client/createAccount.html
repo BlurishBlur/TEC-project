@@ -1,7 +1,9 @@
-<html>
+<html ng-app="createAccount">
     <head>
         <link rel="stylesheet" type="text/css" href="css/createAccountStyle.css"/>
         <title>Create Account</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
+        <script src="js/createAccount.js"></script>
         <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
         <script>
 	       $(function() {
@@ -26,14 +28,12 @@
         <div class="title">
             Create Account
         </div>
-        <div class="input">
+        <div class="input" ng-controller="checkInput">
             <input id="username" type="text" class="inputText" placeholder="Username..."/><br><br><br>
-            <input id="password" type="password" class="inputText" placeholder="Password..."/><br><br><br>
-            <input id="repeat" type="password" class="inputText" placeholder="Repeat Password..."/><span id="message" class="message"></span>
-        </div>
-        <div class="input">
-            <button id="create" class="button"><span>CREATE</span></button>
-            <button id="cancel" onclick="location.href='index.html'" style="width: 140px" class="button moveRight"><span>CANCEL</span></button>
+            <input id="password" ng-model="password" type="password" class="inputText" placeholder="Password..."/><br><br><br>
+            <input id="repeat" ng-model="repeat" type="password" class="inputText" placeholder="Repeat Password..."/><span id="message" class="message"></span><br><br><br>
+            <button ng-click="createUser(password, repeat)" id="create" class="button"><span>CREATE</span></button>
+            <button id="cancel" onclick="location.href='index.html'" style="width: 140px" class="button moveRight"><span>CANCEL</span></button><span class="message"> {{returnMessage}} </span>
         </div>
     </body>
 </html>
