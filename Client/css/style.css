@@ -13,9 +13,31 @@ body {
     margin-left: 20%;
 }
 
+.subTitle {
+    font-family: tahoma;
+    color: whitesmoke;
+    font-size: 40;
+    margin: auto;
+    font-weight: 600;
+    margin-top: 7%;
+    margin-left: 15%;
+}
+
+.message {
+    font-family: tahoma;
+    color: whitesmoke;
+    font-size: 20;
+    margin-left: 3%;
+}
+
 .input {
     margin-top: 2%;
     margin-left: 20%;
+}
+
+.createAccountInput {
+    margin-top: 2%;
+    margin-left: 15%;
 }
 
 .inputText {
@@ -27,10 +49,25 @@ body {
     
 }
 
+.createAccountInputText {
+    width: 700px;
+    height: 40px;
+    font-size: 20;
+    padding-left: 20px;
+    border: 3px solid #9EA9AB;
+}
+
 .inputText:focus {
     border: 3px solid #282B2B;
     transition: 0.5s;
 }
+
+.createAccountInputText:focus {
+    border: 3px solid #282B2B;
+    transition: 0.5s;
+}
+
+/* BUTTONS IN LOGIN */
 
 .button {
     width: 125;
@@ -74,6 +111,36 @@ body {
 }
 
 .button:active {
+    background-color: #263238;
+    border: 2px solid #1D272B;
+}
+
+/* BUTTONS IN CREATE ACCOUNT*/
+
+.createUserButton {
+    width: 125;
+    height: 50;
+    font-size: 16;
+    color: whitesmoke;
+    background-color: #2E7D32;
+    border: none;
+    cursor: pointer;
+}
+
+.createUserButton.moveRight {
+    margin-left: 25px;
+    background-color: #C62828;
+}
+
+.createUserButton:hover {
+    background-color: #1B5E20;
+}
+
+.createUserButton.moveRight:hover {
+    background-color: #B71C1C;
+}
+
+.createUserButton:active {
     background-color: #263238;
     border: 2px solid #1D272B;
 }

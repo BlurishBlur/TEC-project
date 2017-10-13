@@ -1,6 +1,6 @@
 <html ng-app="createAccount">
     <head>
-        <link rel="stylesheet" type="text/css" href="css/createAccountStyle.css"/>
+        <link rel="stylesheet" type="text/css" href="css/style.css"/>
         <title>Create Account</title>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
         <script src="js/createAccount.js"></script>
@@ -25,15 +25,15 @@
         </script>
     </head>
     <body>
-        <div class="title">
+        <div class="subTitle">
             Create Account
         </div>
-        <div class="input" ng-controller="checkInput">
-            <input id="username" type="text" class="inputText" placeholder="Username..."/><br><br><br>
-            <input id="password" ng-model="password" type="password" class="inputText" placeholder="Password..."/><br><br><br>
-            <input id="repeat" ng-model="repeat" type="password" class="inputText" placeholder="Repeat Password..."/><span id="message" class="message"></span><br><br><br>
-            <button ng-click="createUser(password, repeat)" id="create" class="button"><span>CREATE</span></button>
-            <button id="cancel" onclick="location.href='index.html'" style="width: 140px" class="button moveRight"><span>CANCEL</span></button><span class="message"> {{returnMessage}} </span>
+        <div class="createAccountInput" ng-controller="checkInput">
+            <input id="username" ng-model="user" type="text" class="createAccountInputtext" placeholder="Username..."/><br><br><br>
+            <input id="password" ng-model="password" type="password" class="createAccountInputtext" placeholder="Password..."/><br><br><br>
+            <input id="repeat" ng-model="repeat" type="password" class="createAccountInputtext" placeholder="Repeat Password..."/><span id="message" class="message"></span><br><br><br>
+            <button ng-click="createUser(password, repeat, user)" id="create" class="createUserButton"><span>CREATE</span></button>
+            <button id="cancel" onclick="location.href='index.html'" style="width: 140px" class="createUserButton moveRight"><span>CANCEL</span></button><span class="message"> {{returnMessage}} </span>
         </div>
     </body>
 </html>
