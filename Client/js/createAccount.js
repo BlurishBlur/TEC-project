@@ -15,4 +15,14 @@ createAccount.controller('checkInput', function ($scope) {
             $scope.returnMessage = "User Created!";
         }
     };
+    
+    $scope.checkPasswordMatch = function (password, repeatedPassword) {
+        if (repeatedPassword === "") {
+            $scope.passwordMatchMessage = "";
+        } else if (password === repeatedPassword) {
+            $scope.passwordMatchMessage = "Password matches";
+        } else {
+            $scope.passwordMatchMessage = "Password does not match";
+        }
+    };
 });

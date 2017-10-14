@@ -5,24 +5,11 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
         <script src="js/createAccount.js"></script>
         <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-        <script>
-	       $(function() {
-          function checkPassword() {
-              if($("#repeat").val() == ""){
-                $("#message").html("");
-              }
-              else if($("#password").val() == $("#repeat").val()){
-                  $("#message").html("Password match!");
-              }
-              else{
-                  $("#message").html("Password doesn't match!");
-              }
-            }
-            
+        <!--<script>
             $("#repeat").keyup(checkPassword);
             $("#password").keyup(checkPassword);
            });
-        </script>
+        </script>-->
     </head>
     <body>
         <div class="subTitle">
@@ -30,8 +17,8 @@
         </div>
         <div class="createAccountInput" ng-controller="checkInput">
             <input id="username" ng-model="user" type="text" class="createAccountInputtext" placeholder="Username..."/><br><br><br>
-            <input id="password" ng-model="password" type="password" class="createAccountInputtext" placeholder="Password..."/><br><br><br>
-            <input id="repeat" ng-model="repeat" type="password" class="createAccountInputtext" placeholder="Repeat Password..."/><span id="message" class="message"></span><br><br><br>
+            <input ng-keyup="checkPasswordMatch(password, repeat)" id="password" ng-model="password" type="password" class="createAccountInputtext" placeholder="Password..."/><br><br><br>
+            <input ng-keyup="checkPasswordMatch(password, repeat)" id="repeat" ng-model="repeat" type="password" class="createAccountInputtext" placeholder="Repeat Password..."/><span id="message" class="message"> {{passwordMatchMessage}} </span><br><br><br>
             <button ng-click="createUser(password, repeat, user)" id="create" class="createUserButton"><span>CREATE</span></button>
             <button id="cancel" onclick="location.href='index.html'" style="width: 140px" class="createUserButton moveRight"><span>CANCEL</span></button><span class="message"> {{returnMessage}} </span>
         </div>
