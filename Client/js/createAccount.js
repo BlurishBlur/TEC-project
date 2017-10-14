@@ -31,6 +31,7 @@ document.getElementById('create').onclick(do_put());*/
 
 createAccount.controller('checkInput', function ($scope) {
     "use strict";
+    console.log("test");
     
     $scope.createUser = function (password, repeat, user) {
         if (user === undefined || user === "") {
