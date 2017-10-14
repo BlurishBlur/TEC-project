@@ -2,9 +2,9 @@
     <head>
         <link rel="stylesheet" type="text/css" href="css/style.css"/>
         <title>Create Account</title>
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
         <script src="js/createAccount.js"></script>
-        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
         <!--<script>
             $("#repeat").keyup(checkPassword);
             $("#password").keyup(checkPassword);
@@ -15,7 +15,7 @@
         <div class="subTitle">
             Create Account
         </div>
-        <div class="createAccountInput" ng-controller="checkInput">
+        <div class="createAccountInput" ng-controller="httpCtrl">
             <input id="username" ng-model="user" type="text" class="createAccountInputtext" placeholder="Username..."/><br><br><br>
             <input ng-keyup="checkPasswordMatch(password, repeat)" id="password" ng-model="password" type="password" class="createAccountInputtext" placeholder="Password..."/><br><br><br>
             <input ng-keyup="checkPasswordMatch(password, repeat)" id="repeat" ng-model="repeat" type="password" class="createAccountInputtext" placeholder="Repeat Password..."/><span id="message" class="message"> {{passwordMatchMessage}} </span><br><br><br>
