@@ -1,6 +1,6 @@
 /*global angular*/
 var createAccount = angular.module('createAccount', []);
-
+/*
 var url = "http://localhost:8761/users";
 
 var put = function (url, data, callback) {
@@ -27,7 +27,7 @@ var do_put = function () {
     });
 };
 
-document.getElementById('create').onclick(do_put());
+document.getElementById('create').onclick(do_put());*/
 
 createAccount.controller('checkInput', function ($scope) {
     "use strict";
