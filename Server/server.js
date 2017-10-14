@@ -1,10 +1,16 @@
 #!/usr/bin/env node
 
 var http = require('http');
-const PORT = 9998;
+const PORT = 8761;
 
 var users = [];
 users[users.length] = {name: "Niels"};
+
+saveUser = function(data) {
+    var split = data.split(',');
+    users.push({name: split[0], password: split[1]});
+    console.log(users);
+}
 
 sendHeader = function (response) {
     response.writeHead(200, {'Content-Type': 'application/json',
@@ -14,6 +20,14 @@ sendHeader = function (response) {
 
 getUsers = function(request, response) {
     response.end(JSON.stringify(users));
+}
+
+putUser = function(request, response) {
+    request.on('data', function(data) {
+        console.log('' + data);
+        saveUser(data);
+        response.end();
+    });
 }
 
 // http handlers
@@ -51,7 +65,7 @@ handler_options = function (request, response) {
 
 routes = { //undersøg nærmere hvornår put og post henholdsvis skal bruges
     'GET/users':     getUsers,
-    'PUT/users':     handler_put,
+    'PUT/users':     putUser,
     'POST':          handler_post,
     'DELETE':        handler_delete,
     'OPTIONS':       handler_options,
