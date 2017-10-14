@@ -36,15 +36,35 @@ http.controller('httpCtrl', function ($scope) {
     
     $j("#create").click($scope.do_put);
     
+    function colorUser(value) {
+        $scope.styleUser = function () {
+            return { "border": value };
+        };
+    }
+    
+    function colorPassword(value) {
+        $scope.stylePassword = function () {
+            return { "border": value };
+        };
+    }
+    
     $scope.createUser = function (password, repeat, user) {
         if (user === undefined || user === "") {
             $scope.returnMessage = "Please write a username.";
+            colorUser("3px solid #840200");
+            colorPassword("3px solid #9EA9AB");
         } else if (password.length < 6) {
             $scope.returnMessage = "Please check that password is more than 6 characters.";
+            colorPassword("3px solid #840200");
+            colorUser("3px solid #9EA9ABs");
         } else if (user === password) {
             $scope.returnMessage = "Username and password cannot be the same.";
+            colorUser("3px solid #840200");
+            colorPassword("3px solid #840200");
         } else {
             $scope.returnMessage = "User Created!";
+            colorUser("3px solid #9EA9ABs");
+            colorPassword("3px solid #9EA9AB");
         }
     };
     
