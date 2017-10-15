@@ -101,7 +101,7 @@ http.controller('httpCtrl', function ($scope) {
             colorUser("3px solid #1B5E20");
             colorPassword("3px solid #1B5E20");
 
-            //$scope.do_put;
+            $scope.do_put();
         }
         else {
             $scope.returnMessage = "There were " + errors + " error(s)." ;
