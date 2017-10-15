@@ -64,7 +64,7 @@ body {
 }
 
 .createAccountInputText:focus {
-    border: 3px solid #282B2B;
+    border: 3px solid #282B2B !important;
     transition: 0.5s;
 }
 
