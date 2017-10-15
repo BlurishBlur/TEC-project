@@ -4,11 +4,13 @@ var http = require('http');
 const PORT = 8761;
 
 var users = [];
-users[users.length] = {name: "Niels"};
+users.push({username: "Niels", password: "123"});
+users.push({username: "Antonio", password: "123"});
+users.push({username: "Niels", password: "123"});
 
 saveUser = function(data) {
-    var split = data.split(',');
-    users.push({name: split[0], password: split[1]});
+    var userObj = JSON.parse(data);
+    users.push(userObj);
     console.log(users);
 }
 
@@ -24,7 +26,7 @@ getUsers = function(request, response) {
 
 putUser = function(request, response) {
     request.on('data', function(data) {
-        console.log('' + data);
+        console.log('Received user data: ' + data);
         saveUser(data);
         response.end();
     });

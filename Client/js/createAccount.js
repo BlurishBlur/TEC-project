@@ -25,10 +25,10 @@ http.controller('httpCtrl', function ($scope) {
     };
 
     $scope.do_put = function () {
-        var usernameVal = document.getElementById('username'),
-            passVal = document.getElementById('password'),
-            user = JSON.stringify({username: usernameVal, password: passVal});
-        put(url, user, function (content) {
+        var userObj = {username: $scope.user, password: $scope.password},
+            userObjJson = JSON.stringify(userObj);
+
+        put(url, userObjJson, function (content) {
         //var resultArea = document.getElementById('result');
         //resultArea.innerHTML = content;
         });
@@ -48,16 +48,16 @@ http.controller('httpCtrl', function ($scope) {
         };
     }
     
-    $scope.createUser = function (password, repeat, user) {
-        if (user === undefined || user === "") {
+    $scope.createUser = function () {
+        if ($scope.user === undefined || $scope.user === "") {
             $scope.returnMessage = "Please write a username.";
             colorUser("3px solid #840200");
             colorPassword("3px solid #9EA9AB");
-        } else if (password.length < 6) {
+        } else if ($scope.password.length < 6) {
             $scope.returnMessage = "Please check that password is more than 6 characters.";
             colorPassword("3px solid #840200");
             colorUser("3px solid #9EA9ABs");
-        } else if (user === password) {
+        } else if ($scope.user === $scope.password) {
             $scope.returnMessage = "Username and password cannot be the same.";
             colorUser("3px solid #840200");
             colorPassword("3px solid #840200");
@@ -68,10 +68,10 @@ http.controller('httpCtrl', function ($scope) {
         }
     };
     
-    $scope.checkPasswordMatch = function (password, repeatedPassword) {
-        if (repeatedPassword === "") {
+    $scope.checkPasswordMatch = function () {
+        if ($scope.repeat === "") {
             $scope.passwordMatchMessage = "";
-        } else if (password === repeatedPassword) {
+        } else if ($scope.password === $scope.repeat) {
             $scope.passwordMatchMessage = "Password matches";
         } else {
             $scope.passwordMatchMessage = "Password does not match";
