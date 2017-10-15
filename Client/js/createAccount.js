@@ -3,7 +3,11 @@
 /*global $, jQuery, alert*/
 var $j = jQuery.noConflict();
 var http = angular.module('createAccount', []);
-var url = "http://localhost:8761/users";
+
+const PORT = 8761;
+const SERVER = "localhost";
+const BASE_URL = "http://" + SERVER + ":" + PORT;
+var urlUsers = "/users";
 
 
 /*
@@ -12,6 +16,10 @@ document.getElementById('create').onclick(do_put());*/
 
 http.controller('httpCtrl', function ($scope) {
     "use strict";
+
+    function getUsersUrl() {
+        return BASE_URL + urlUsers;
+    }
     
     var put = function (url, data, callback) {
         var xmlHttp = new XMLHttpRequest();
@@ -28,7 +36,7 @@ http.controller('httpCtrl', function ($scope) {
         var userObj = {username: $scope.user, password: $scope.password},
             userObjJson = JSON.stringify(userObj);
 
-        put(url, userObjJson, function (content) {
+        put(getUsersUrl(), userObjJson, function (content) {
         //var resultArea = document.getElementById('result');
         //resultArea.innerHTML = content;
         });
