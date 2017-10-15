@@ -16,7 +16,7 @@ createAccountPage.controller('httpCtrl', function ($scope) {
         return BASE_URL + urlUsers;
     }
     
-    function _put (url, data, callback) {
+    function put (url, data, callback) {
         var xmlHttp = new XMLHttpRequest();
         xmlHttp.onreadystatechange = function () {
             if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
@@ -27,11 +27,11 @@ createAccountPage.controller('httpCtrl', function ($scope) {
         xmlHttp.send(data);
     };
 
-    $scope.put = function () {
+    $scope.putUser = function () {
         var userObj = {username: $scope.username, password: $scope.password},
             userObjJson = JSON.stringify(userObj);
 
-        _put(getUsersUrl(), userObjJson, function (content) {
+        put(getUsersUrl(), userObjJson, function (content) {
             //$scope.returnMessage = content;
             $j("#returnMessage").text(content);
         });
@@ -96,7 +96,7 @@ createAccountPage.controller('httpCtrl', function ($scope) {
             colorUser("3px solid #1B5E20");
             colorPassword("3px solid #1B5E20");
 
-            $scope.put();
+            $scope.putUser();
         }
         else {
             //$scope.returnMessage = "There were " + errors + " error(s).";
