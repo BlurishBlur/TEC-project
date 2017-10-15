@@ -32,8 +32,8 @@ createAccountPage.controller('httpCtrl', function ($scope) {
             userObjJson = JSON.stringify(userObj);
 
         put(getUsersUrl(), userObjJson, function (content) {
-            //$scope.returnMessage = content;
-            $j("#returnMessage").text(content);
+            $scope.returnMessage = content;
+            $scope.$apply()
         });
     };
     
@@ -50,7 +50,7 @@ createAccountPage.controller('httpCtrl', function ($scope) {
     }
 
     function reset() {
-        $j("#returnMessage").text("");
+        $scope.returnMessage = "";
         $scope.usernameReturnMessage = "";
         $scope.styleUser = function () {
             return { "border": "3px solid #9EA9AB" };
@@ -99,8 +99,7 @@ createAccountPage.controller('httpCtrl', function ($scope) {
             $scope.putUser();
         }
         else {
-            //$scope.returnMessage = "There were " + errors + " error(s).";
-            $j("#returnMessage").text("There " + (errors > 1 ? " were " + errors + " errors" : " was 1 error") + ".");
+            $scope.returnMessage = "There " + (errors > 1 ? " were " + errors + " errors" : " was 1 error") + ".";
         }
     };
 
