@@ -6,7 +6,7 @@ const PORT = 8761;
 var users = [];
 users.push({username: "Niels", password: "123"});
 users.push({username: "Antonio", password: "123"});
-users.push({username: "Niels", password: "123"});
+users.push({username: "Niclas", password: "123"});
 
 saveUser = function(data) {
     var userObj = JSON.parse(data);
@@ -28,24 +28,10 @@ putUser = function(request, response) {
     request.on('data', function(data) {
         console.log('Received user data: ' + data);
         saveUser(data);
-        response.end();
+        response.end('User created.');
     });
 }
 
-// http handlers
-handler_get = function (request, response) {
-    sendHeader(response);
-    //response.status(404).end("Not found");
-    //response.end(JSON.stringify(library));
-};
-handler_put = function (request, response) {
-    request.on('data', function(data) {
-        console.log(''+data);
-        sendHeader(response);       
-        //response.end(JSON.stringify(putInArray(''+data)));
-        response.end(JSON.stringify('ALTING ER GODT'));
-    });
-};
 handler_post = function (request, response) {
     request.on('data', function(data) {
         console.log(''+data);
@@ -61,7 +47,7 @@ handler_delete = function (request, response) {
     });
 };
 handler_options = function (request, response) {
-    sendHeader(response);
+    //sendHeader(response);
     response.end(null);
 };
 
@@ -87,12 +73,8 @@ handleRequest = function(request, response) {
 var server = http.createServer(function (request, response){
     console.log("Received request for " + request['method'] + request.url);
     handleRequest(request, response);
-
-
-    //console.log(request['method']+' '+request.url);
-    //dispatch[request['method']](request, response);
 });
+
 server.listen(PORT, function(){
     console.log("Listening to http://localhost:%s", PORT);
 });
-

@@ -2,26 +2,21 @@
 /*jslint browser: true*/
 /*global $, jQuery, alert*/
 var $j = jQuery.noConflict();
-var http = angular.module('createAccount', []);
+var createAccountPage = angular.module('createAccount', []);
 
 const PORT = 8761;
 const SERVER = "localhost";
 const BASE_URL = "http://" + SERVER + ":" + PORT;
 var urlUsers = "/users";
 
-
-/*
-
-document.getElementById('create').onclick(do_put());*/
-
-http.controller('httpCtrl', function ($scope) {
+createAccountPage.controller('httpCtrl', function ($scope) {
     "use strict";
 
     function getUsersUrl() {
         return BASE_URL + urlUsers;
     }
     
-    var put = function (url, data, callback) {
+    function _put (url, data, callback) {
         var xmlHttp = new XMLHttpRequest();
         xmlHttp.onreadystatechange = function () {
             if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
@@ -32,13 +27,13 @@ http.controller('httpCtrl', function ($scope) {
         xmlHttp.send(data);
     };
 
-    $scope.do_put = function () {
-        var userObj = {username: $scope.user, password: $scope.password},
+    $scope.put = function () {
+        var userObj = {username: $scope.username, password: $scope.password},
             userObjJson = JSON.stringify(userObj);
 
-        put(getUsersUrl(), userObjJson, function (content) {
-        //var resultArea = document.getElementById('result');
-        //resultArea.innerHTML = content;
+        _put(getUsersUrl(), userObjJson, function (content) {
+            //$scope.returnMessage = content;
+            $j("#returnMessage").text(content);
         });
     };
     
@@ -55,6 +50,7 @@ http.controller('httpCtrl', function ($scope) {
     }
 
     function reset() {
+        $j("#returnMessage").text("");
         $scope.usernameReturnMessage = "";
         $scope.styleUser = function () {
             return { "border": "3px solid #9EA9AB" };
@@ -71,7 +67,7 @@ http.controller('httpCtrl', function ($scope) {
         reset();
         var errors = 0;
         // Check username
-        if ($scope.user === undefined || $scope.user === "") {
+        if ($scope.username === undefined || $scope.username === "") {
             $scope.usernameReturnMessage = "Please write a username.";
             colorUser("3px solid #840200");
             errors++;
@@ -83,7 +79,7 @@ http.controller('httpCtrl', function ($scope) {
             errors++;
         } 
         // Check if pass and username is equal
-        if ($scope.user != undefined && $scope.password != undefined && $scope.user === $scope.password) {
+        if ($scope.username != undefined && $scope.password != undefined && $scope.username === $scope.password) {
             $scope.passwordReturnMessage = "Username and password cannot be the same.";
             colorPassword("3px solid #840200");
             errors++;
@@ -97,24 +93,15 @@ http.controller('httpCtrl', function ($scope) {
 
         // Final error check
         if (errors === 0) {
-            $scope.returnMessage = "User Created!";
             colorUser("3px solid #1B5E20");
             colorPassword("3px solid #1B5E20");
 
-            $scope.do_put();
+            $scope.put();
         }
         else {
-            $scope.returnMessage = "There were " + errors + " error(s)." ;
+            //$scope.returnMessage = "There were " + errors + " error(s).";
+            $j("#returnMessage").text("There " + (errors > 1 ? " were " + errors + " errors" : " was 1 error") + ".");
         }
     };
-    
-    /*$scope.checkPasswordMatch = function () {
-        if ($scope.repeat === "") {
-            $scope.passwordMatchMessage = "";
-        } else if ($scope.password === $scope.repeat) {
-            $scope.passwordMatchMessage = "Password matches";
-        } else {
-            $scope.passwordMatchMessage = "Password does not match";
-        }
-    };*/
+
 });
