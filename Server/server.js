@@ -14,6 +14,16 @@ saveUser = function(data) {
     console.log(users);
 }
 
+logIn = function(data) {
+    var userObj = JSON.parse(data);
+
+    var contains = users.some(function(user) {
+        return user.username === userObj.username && user.password === userObj.password;
+    });
+    console.log('Logged in: ' + contains);
+    return contains;
+}
+
 sendHeader = function (response) {
     response.writeHead(200, {'Content-Type': 'application/json',
                              'Access-Control-Allow-Origin': '*',
@@ -24,12 +34,20 @@ getUsers = function(request, response) {
     response.end(JSON.stringify(users));
 }
 
-putUser = function(request, response) {
+putUser = function(request, response) { //create
     request.on('data', function(data) {
         console.log('Received user data: ' + data);
         saveUser(data);
         response.end('User created.');
     });
+}
+
+postUser = function(request, response) { //login
+    request.on('data', function(data) {
+        console.log('Received login request from: ' + data);
+        var loggedIn = logIn(data);
+        response.end(JSON.stringify(loggedIn));
+    })
 }
 
 handler_post = function (request, response) {
@@ -54,7 +72,7 @@ handler_options = function (request, response) {
 routes = { //undersøg nærmere hvornår put og post henholdsvis skal bruges
     'GET/users':     getUsers,
     'PUT/users':     putUser,
-    'POST':          handler_post,
+    'POST/users':    postUser,
     'DELETE':        handler_delete,
     'OPTIONS':       handler_options,
 };
