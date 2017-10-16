@@ -9,6 +9,10 @@ const SERVER = "localhost";
 const BASE_URL = "http://" + SERVER + ":" + PORT;
 var urlUsers = "/users";*/
 
+forumApp.config(['$locationProvider', function($locationProvider) {
+  $locationProvider.hashPrefix('');
+}]);
+
 forumApp.config(function($routeProvider, $locationProvider) {
     $routeProvider
     .when('/', {
@@ -19,11 +23,15 @@ forumApp.config(function($routeProvider, $locationProvider) {
         templateUrl: 'createAccount.html', 
         controller: 'createAccountCtrl'
     })
+    .when('/404', {
+    	templateUrl: '404.html'
+    })
     .otherwise({
-        template: '404 - Not found'
+        redirectTo: '/404'
     });
-    //$locationProvider.html5Mode(true);
+    $locationProvider.html5Mode(true);
 });
+
 
 forumApp.controller('loginCtrl', function ($scope, $location) {
     "use strict";
