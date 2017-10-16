@@ -24,18 +24,18 @@ forumApp.config(['$locationProvider', function($locationProvider) {
 forumApp.config(function($routeProvider, $locationProvider) {
     $routeProvider
     .when('/', {
-        templateUrl: 'login.html', 
+        templateUrl: 'pages/login.html', 
         controller: 'loginCtrl'
     })
     .when('/create', {
-        templateUrl: 'createAccount.html', 
+        templateUrl: 'pages/createAccount.html', 
         controller: 'createAccountCtrl'
     })
     .when('/dashboard', {
-    	templateUrl: 'dashboard.html'
+    	templateUrl: 'pages/dashboard.html'
     })
     .when('/404', {
-    	templateUrl: '404.html'
+    	templateUrl: 'pages/404.html'
     })
     .otherwise({
         redirectTo: '/404'
