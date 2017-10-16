@@ -9,7 +9,7 @@ ul {
     padding: 0;
     overflow: hidden;
     background: linear-gradient(to bottom right, #0B314F, #0A2C47);
-    position: fixed;
+    position: relative;
     top: 0;
     width: 100%;
 }
@@ -20,7 +20,7 @@ li {
 
 li a {
     display: block;
-    padding: 20px 20px;
+    padding: 20px;
     text-align: center;
     font-family: tahoma;
     color: #D5DDDE;
@@ -31,6 +31,12 @@ li a {
     color: white;
     border-bottom-style: solid;
     border-bottom-color: whitesmoke;
+}
+
+li a:hover:not(.active) {
+    background: linear-gradient(to bottom right, #000E21,#00122B);
+    border-bottom-style: solid;
+    border-bottom-color: #00122B;
 }
 
 .title {
