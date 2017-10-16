@@ -47,6 +47,12 @@ forumApp.config(function($routeProvider, $locationProvider) {
 forumApp.controller('loginCtrl', function ($scope, $location) {
     "use strict";
 
+    $j('#password').keypress(function(e){
+  		if(e.keyCode==13) {
+  			$j('#loginButton').click();
+  		}
+    });
+
     function getUsersUrl() {
         return BASE_URL + urlUsers;
     }
@@ -92,6 +98,12 @@ forumApp.controller('loginCtrl', function ($scope, $location) {
 
 forumApp.controller('createAccountCtrl', function ($scope) {
     "use strict";
+
+    $j('#repeat').keypress(function(e){
+  		if(e.keyCode==13) {
+  			$j('#create').click();
+  		}
+    });
 
     function getUsersUrl() {
         return BASE_URL + urlUsers;
