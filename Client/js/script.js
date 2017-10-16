@@ -2,14 +2,66 @@
 /*jslint browser: true*/
 /*global $, jQuery, alert*/
 var $j = jQuery.noConflict();
-var createAccountPage = angular.module('createAccount', []);
+var forumApp = angular.module('forumApp', ['ngRoute']);
 
-const PORT = 8761;
+/*const PORT = 8761;
 const SERVER = "localhost";
 const BASE_URL = "http://" + SERVER + ":" + PORT;
-var urlUsers = "/users";
+var urlUsers = "/users";*/
 
-createAccountPage.controller('httpCtrl', function ($scope) {
+forumApp.config(function($routeProvider, $locationProvider) {
+    $routeProvider
+    .when('/', {
+        templateUrl: 'login.html', 
+        controller: 'loginCtrl'
+    })
+    .when('/create', {
+        templateUrl: 'createAccount.html', 
+        controller: 'createAccountCtrl'
+    })
+    .otherwise({
+        template: '404 - Not found'
+    });
+    //$locationProvider.html5Mode(true);
+});
+
+forumApp.controller('loginCtrl', function ($scope, $location) {
+    "use strict";
+
+    function getUsersUrl() {
+        return BASE_URL + urlUsers;
+    }
+    
+    function post (url, data, callback) {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function () {
+            if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
+                callback(xmlHttp.responseText);
+            }
+        };
+        xmlHttp.open("POST", url, true); // true for asynchronous 
+        xmlHttp.send(data);
+    };
+
+    $scope.postUser = function () {
+        var userObj = {username: $scope.username, password: $scope.password},
+            userObjJson = JSON.stringify(userObj);
+
+        post(getUsersUrl(), userObjJson, function (content) {
+        });
+    };
+    
+    $scope.logIn = function() {
+        $scope.postUser();
+    }
+
+    $scope.goToCreate = function() {
+        $location.path('/create');
+    }
+
+});
+
+forumApp.controller('createAccountCtrl', function ($scope) {
     "use strict";
 
     function getUsersUrl() {

@@ -1,29 +1,19 @@
-<html ng-app="createAccount">
-    <head>
-        <link rel="stylesheet" type="text/css" href="css/style.css"/>
-        <title>Create Account</title>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>     
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
-        <script src="js/createAccount.js"></script>
-
-    </head>
-    <body>
-        <div class="subTitle">
-            Create Account
-        </div>
-        <div class="createAccountInput" ng-controller="httpCtrl">
-            <input id="username" type="text" class="createAccountInputText" ng-model="username" ng-style="styleUser()" placeholder="Username..." />
-            <span class="message"> {{usernameReturnMessage}} </span>
-            <br><br><br>
-            <input id="password" type="password" class="createAccountInputText" ng-keyup="checkPasswordMatch()" ng-model="password" ng-style="stylePassword()" placeholder="Password..."  />
-            <span class="message"> {{passwordReturnMessage}} </span>
-            <br><br><br>
-            <input id="repeat" type="password" class="createAccountInputText" ng-keyup="checkPasswordMatch()" ng-model="repeat" ng-style="stylePassword()"  placeholder="Repeat Password..."  />
-            <span class="message"> {{repeatPasswordReturnMessage}} </span>
-            <br><br><br>
-            <button id="create" class="createUserButton" ng-click="createUser()">CREATE</button>
-            <button id="cancel" class="createUserButton moveRight" onclick="location.href='index.html'" style="width: 140px">CANCEL</button>
-            <span id="returnMessage" class="message"> {{returnMessage}} </span>
-        </div>
-    </body>
-</html>
+<div>
+    <div class="subTitle">
+        Create Account
+    </div>
+    <div class="createAccountInput">
+        <input id="username" type="text" class="createAccountInputText" ng-model="username" ng-style="styleUser()" placeholder="Username..." />
+        <span class="message"> {{usernameReturnMessage}} </span>
+        <br><br><br>
+        <input id="password" type="password" class="createAccountInputText" ng-keyup="checkPasswordMatch()" ng-model="password" ng-style="stylePassword()" placeholder="Password..."  />
+        <span class="message"> {{passwordReturnMessage}} </span>
+        <br><br><br>
+        <input id="repeat" type="password" class="createAccountInputText" ng-keyup="checkPasswordMatch()" ng-model="repeat" ng-style="stylePassword()"  placeholder="Repeat Password..."  />
+        <span class="message"> {{repeatPasswordReturnMessage}} </span>
+        <br><br><br>
+        <button id="create" class="createUserButton" ng-click="createUser()">CREATE</button>
+        <button id="cancel" class="createUserButton moveRight" onclick="location.href='index.html'" style="width: 140px">CANCEL</button>
+        <span id="returnMessage" class="message"> {{returnMessage}} </span>
+    </div>
+</div>

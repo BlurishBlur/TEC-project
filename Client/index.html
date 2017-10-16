@@ -1,21 +1,15 @@
-<html ng-app="index">
+<html ng-app="forumApp">
     <head>
+        <title>Forum</title>
+        <base href="/"/>
+        <meta charset="utf-8">
         <link rel="stylesheet" type="text/css" href="css/style.css"/>
-        <title>Login Page</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>     
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
-        <script src="js/index.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
+        <script src="js/script.js"></script>
     </head>
     <body>
-        <div class="title">
-            THE FORUM
-        </div>
-        <div class="input" ng-controller="httpCtrl">
-            <input id="username" type="text" class="inputText" ng-model="username" placeholder="Username..."/><br><br><br>
-            <input id="password" type="password" class="inputText" ng-model="password" placeholder="Password..."/>
-        <br><br><br>
-            <button id="loginButton" class="button" ng-click="logIn()"><span>LOGIN</span></button>
-            <button id="createUser" onclick="location.href='createAccount.html'" style="width: 180px" class="button moveRight"><span>CREATE USER</span></button>
-        </div>
+    	<div ng-view></div>
     </body>
 </html>
