@@ -3,6 +3,34 @@ body {
     background: radial-gradient(farthest-side at 50%, #2196F3, #42A5F5);
 }
 
+ul {
+    list-style-type: none;
+    padding: 0;
+    overflow: hidden;
+    background: linear-gradient(to bottom right, #0B314F, #0A2C47);
+    position: relative;
+    top: 0;
+    width: 100%;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    padding: 20px;
+    font-family: tahoma;
+    color: #D5DDDE;
+    text-decoration: none;
+}
+
+.active{
+    color: white;
+    border-bottom-style: solid;
+    border-bottom-color: whitesmoke;
+}
+
 .title {
     font-family: tahoma;
     color: whitesmoke;
@@ -46,7 +74,7 @@ body {
     font-size: 28;
     padding-left: 20px;
     border: 3px solid #9EA9AB;
-    
+    transition: 0.5s;
 }
 
 .createAccountInputText {
@@ -96,6 +124,7 @@ body {
 
 .button.moveRight {
     margin-left: 50px;
+    width: 180px;
 }
 
 .button:hover {

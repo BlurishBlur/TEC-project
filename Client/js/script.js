@@ -4,10 +4,18 @@
 var $j = jQuery.noConflict();
 var forumApp = angular.module('forumApp', ['ngRoute']);
 
-/*const PORT = 8761;
+const PORT = 8761;
 const SERVER = "localhost";
 const BASE_URL = "http://" + SERVER + ":" + PORT;
-var urlUsers = "/users";*/
+var urlUsers = "/users";
+
+function colorBorderRed(inputElement) {
+	inputElement.css("border", "3px solid #840200");
+}
+
+function colorBorderGrey(inputElement) {
+	inputElement.css("border", "3px solid #9EA9AB");
+}
 
 forumApp.config(['$locationProvider', function($locationProvider) {
   $locationProvider.hashPrefix('');
@@ -22,6 +30,9 @@ forumApp.config(function($routeProvider, $locationProvider) {
     .when('/create', {
         templateUrl: 'createAccount.html', 
         controller: 'createAccountCtrl'
+    })
+    .when('/dashboard', {
+    	templateUrl: 'dashboard.html'
     })
     .when('/404', {
     	templateUrl: '404.html'
@@ -56,6 +67,16 @@ forumApp.controller('loginCtrl', function ($scope, $location) {
             userObjJson = JSON.stringify(userObj);
 
         post(getUsersUrl(), userObjJson, function (content) {
+        	var loggedIn = JSON.parse(content);
+            if (loggedIn == true) {
+                $location.path('/dashboard');
+                $scope.$apply();
+            }
+            else {
+                $scope.loginReturnMessage = "Wrong username or password";
+                $scope.$apply();
+                colorBorderRed($j("#username"));
+				colorBorderRed($j("#password"));            }
         });
     };
     
@@ -96,31 +117,17 @@ forumApp.controller('createAccountCtrl', function ($scope) {
             $scope.$apply()
         });
     };
-    
-    function colorUser(value) {
-        $scope.styleUser = function () {
-            return { "border": value };
-        };
-    }
-    
-    function colorPassword(value) {
-        $scope.stylePassword = function () {
-            return { "border": value };
-        };
-    }
-
+ 
     function reset() {
         $scope.returnMessage = "";
         $scope.usernameReturnMessage = "";
-        $scope.styleUser = function () {
-            return { "border": "3px solid #9EA9AB" };
-        };
+        
 
         $scope.passwordReturnMessage = "";
         $scope.repeatPasswordReturnMessage = "";
-        $scope.stylePassword = function () {
-            return { "border": "3px solid #9EA9AB" };
-        };
+        colorBorderGrey($j("#username"));
+        colorBorderGrey($j("#password"));
+        colorBorderGrey($j("#repeat"));
     }
     
     $scope.createUser = function () {
@@ -129,33 +136,31 @@ forumApp.controller('createAccountCtrl', function ($scope) {
         // Check username
         if ($scope.username === undefined || $scope.username === "") {
             $scope.usernameReturnMessage = "Please write a username.";
-            colorUser("3px solid #840200");
+            colorBorderRed($j("#username"));
             errors++;
         }
         // Check password
         if ($scope.password == undefined || $scope.password.length < 6) {
             $scope.passwordReturnMessage = "Please check that password is more than 6 characters.";
-            colorPassword("3px solid #840200");
+            colorBorderRed($j("#password"));
             errors++;
         } 
         // Check if pass and username is equal
         if ($scope.username != undefined && $scope.password != undefined && $scope.username === $scope.password) {
             $scope.passwordReturnMessage = "Username and password cannot be the same.";
-            colorPassword("3px solid #840200");
+            colorBorderRed($j("#password"));
             errors++;
         } 
         // Check if passwords matches
         if ($scope.password === undefined || $scope.repeat === undefined || $scope.password !== $scope.repeat) {
             $scope.repeatPasswordReturnMessage = "Password does not match.";
-            colorPassword("3px solid #840200");
+            colorBorderRed($j("#password"));
+            colorBorderRed($j("#repeat"));
             errors++;
         }
 
         // Final error check
         if (errors === 0) {
-            colorUser("3px solid #1B5E20");
-            colorPassword("3px solid #1B5E20");
-
             $scope.putUser();
         }
         else {

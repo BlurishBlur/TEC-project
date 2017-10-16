@@ -13,6 +13,9 @@
         <input id="password" type="password" class="inputText" ng-model="password" placeholder="Password..."/><br><br><br>
 
         <button id="loginButton" type="button" class="button" ng-click="logIn()"><span>LOGIN</span></button>
-        <button id="createUser" type="button" class="button moveRight" ng-click="goToCreate()" style="width: 180px" ><span>CREATE USER</span></button>
+        <button id="createUser" type="button" class="button moveRight" ng-click="goToCreate()"><span>CREATE USER</span></button>
+    <span class="message">
+    	{{loginReturnMessage}}
+    </span>
     </form>
 </div>
