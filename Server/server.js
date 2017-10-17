@@ -2,11 +2,36 @@
 
 var http = require('http');
 const PORT = 8761;
+var mysql = require('mysql');
 
 var users = [];
 users.push({username: "Niels", password: "123"});
 users.push({username: "Antonio", password: "123"});
 users.push({username: "Niclas", password: "123"});
+
+var con = mysql.createConnection({
+  host: "mysql68.unoeuro.com",
+  user: "lascari_net",
+  password: "Feline123",
+  database: 'lascari_net_db'
+});
+
+con.connect(function(err) {
+  if(err){
+    console.log('Error connecting to Db');
+    return;
+  }
+  console.log('Connection established');
+});
+
+query = function() {
+    con.query('SELECT * FROM Users', function (err, result) {
+        //if (err) throw err;
+        //console.log('${result.username}');
+    });
+}
+
+query();
 
 saveUser = function(data) {
     var userObj = JSON.parse(data);
