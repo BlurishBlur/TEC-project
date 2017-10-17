@@ -9,7 +9,7 @@ ul {
     padding: 0;
     overflow: hidden;
     background: linear-gradient(to bottom right, #0B314F, #0A2C47);
-    position: relative;
+    position: fixed;
     top: 0;
     width: 100%;
 }
