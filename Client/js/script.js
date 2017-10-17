@@ -37,6 +37,15 @@ forumApp.config(function($routeProvider, $locationProvider) {
         controller: 'loginCtrl'
     })
     .when('/create', {
+    	resolve: {
+            "check": function($location) {
+                var loggedIn = JSON.parse(sessionStorage.getItem('loggedIn'));
+                if(loggedIn === true) {
+                    $location.path('/dashboard');
+                    
+                }
+            }
+        }, 
         templateUrl: 'pages/createAccount.html', 
         controller: 'createAccountCtrl'
     })
@@ -50,7 +59,8 @@ forumApp.config(function($routeProvider, $locationProvider) {
                 }
             }
         }, 
-        templateUrl: 'pages/dashboard.html'
+        templateUrl: 'pages/dashboard.html', 
+        controller: 'dashboardCtrl'
     })
     .when('/404', {
     	templateUrl: 'pages/404.html'
@@ -200,5 +210,19 @@ forumApp.controller('createAccountCtrl', function ($scope) {
             $scope.returnMessage = "There " + (errors > 1 ? " were " + errors + " errors" : " was 1 error") + ".";
         }
     };
+
+});
+
+forumApp.controller('dashboardCtrl', function ($scope, $location) {
+    "use strict";
+
+    $scope.gotoHome = function() {
+        $location.path('/dashboard');
+    }
+
+    $scope.logOut = function() {
+    	sessionStorage.setItem('loggedIn', JSON.stringify(false));
+        $location.path('/');
+    }
 
 });

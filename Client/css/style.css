@@ -28,16 +28,17 @@ li {
     float: right;
 }
 
-li a {
+li span {
     display: block;
     padding: 20px;
     text-align: center;
     font-family: tahoma;
     color: #D5DDDE;
     text-decoration: none;
+    cursor: pointer;
 }
 
-li a:hover:not(.active) {
+li span:hover:not(.active) {
     background: linear-gradient(to bottom right, #000E21,#00122B);
     border-bottom-style: solid;
     border-bottom-color: #00122B;
