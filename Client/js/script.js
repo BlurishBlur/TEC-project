@@ -24,6 +24,15 @@ forumApp.config(['$locationProvider', function($locationProvider) {
 forumApp.config(function($routeProvider, $locationProvider) {
     $routeProvider
     .when('/', {
+        resolve: {
+            "check": function($location) {
+                var loggedIn = JSON.parse(sessionStorage.getItem('loggedIn'));
+                if(loggedIn === true) {
+                    $location.path('/dashboard');
+                    
+                }
+            }
+        }, 
         templateUrl: 'pages/login.html', 
         controller: 'loginCtrl'
     })
@@ -32,7 +41,16 @@ forumApp.config(function($routeProvider, $locationProvider) {
         controller: 'createAccountCtrl'
     })
     .when('/dashboard', {
-    	templateUrl: 'pages/dashboard.html'
+        resolve: {
+            "check": function($location) {
+                var loggedIn = JSON.parse(sessionStorage.getItem('loggedIn'));
+                if(!loggedIn) {
+                    $location.path('/');
+                    
+                }
+            }
+        }, 
+        templateUrl: 'pages/dashboard.html'
     })
     .when('/404', {
     	templateUrl: 'pages/404.html'
@@ -73,8 +91,10 @@ forumApp.controller('loginCtrl', function ($scope, $location) {
             userObjJson = JSON.stringify(userObj);
 
         post(getUsersUrl(), userObjJson, function (content) {
-        	var loggedIn = JSON.parse(content);
-            if (loggedIn == true) {
+            var loggedIn = JSON.parse(content);
+            sessionStorage.setItem('loggedIn', JSON.stringify(loggedIn));
+            console.log('reponse from login server: ' + loggedIn);
+            if (loggedIn === true) {
                 $location.path('/dashboard');
                 $scope.$apply();
             }
@@ -82,7 +102,8 @@ forumApp.controller('loginCtrl', function ($scope, $location) {
                 $scope.loginReturnMessage = "Wrong username or password";
                 $scope.$apply();
                 colorBorderRed($j("#username"));
-				colorBorderRed($j("#password"));            }
+				colorBorderRed($j("#password"));
+            }
         });
     };
     
