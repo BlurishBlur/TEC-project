@@ -17,10 +17,6 @@ function colorBorderGrey(inputElement) {
 	inputElement.css("border", "3px solid #9EA9AB");
 }
 
-forumApp.config(['$locationProvider', function($locationProvider) {
-  $locationProvider.hashPrefix('');
-}]);
-
 forumApp.config(function($routeProvider, $locationProvider) {
     $routeProvider
     .when('/', {
@@ -75,7 +71,7 @@ forumApp.config(function($routeProvider, $locationProvider) {
 forumApp.controller('loginCtrl', function ($scope, $location) {
     "use strict";
 
-    $j('#password').keypress(function(e){
+    $j('#password').keypress(function(e) { //Enter keypress
   		if(e.keyCode==13) {
   			$j('#loginButton').click();
   		}
@@ -103,8 +99,8 @@ forumApp.controller('loginCtrl', function ($scope, $location) {
         post(getUsersUrl(), userObjJson, function (content) {
             var loggedIn = JSON.parse(content);
             sessionStorage.setItem('loggedIn', JSON.stringify(loggedIn));
-            console.log('reponse from login server: ' + loggedIn);
             if (loggedIn === true) {
+            	sessionStorage.setItem('user', JSON.stringify($scope.username));
                 $location.path('/dashboard');
                 $scope.$apply();
             }
@@ -215,6 +211,8 @@ forumApp.controller('createAccountCtrl', function ($scope) {
 
 forumApp.controller('dashboardCtrl', function ($scope, $location) {
     "use strict";
+
+    $scope.username = JSON.parse(sessionStorage.getItem('user'));
 
     $scope.gotoHome = function() {
         $location.path('/dashboard');
